@@ -7,6 +7,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import FoodManagerDataService from "../../services/FoodManagerDataService";
 import DropdownComponent from '../components/DropdownComponent.js';
 import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
+import styles from '../../Styles';
 import ModalContainer from '../components/ModalContainer.js';
 import { Button } from 'react-native-paper';
 import CardComponent from '../components/CardComponent.js'
@@ -112,18 +113,5 @@ const AboutToExpire = ({ navigation }) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    // flexContainer: {
-    //     flex: 1,
-    //     padding: 2,
-    //   }
-});
 
 export default AboutToExpire;

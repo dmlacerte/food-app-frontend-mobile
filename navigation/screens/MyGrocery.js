@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import styles from '../../Styles';
 
 const MyGrocery = ({ navigation }) => {
     return (
@@ -8,14 +9,5 @@ const MyGrocery = ({ navigation }) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
 export default MyGrocery; 
