@@ -6,6 +6,7 @@ import RenderHtml from 'react-native-render-html';
 import { Dropdown } from 'react-native-material-dropdown';
 import FoodManagerDataService from "../../services/FoodManagerDataService";
 import DropdownComponent from '../components/DropdownComponent.js';
+import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
 import ModalContainer from '../components/ModalContainer.js';
 import { Button } from 'react-native-paper';
 import CardComponent from '../components/CardComponent.js'
@@ -60,6 +61,21 @@ const AboutToExpire = ({ navigation }) => {
         return (Math.floor((expDateTime - today) / (24 * 3600 * 1000)) + 1);
     };
 
+    const changeUseThisWeekValue = (index) => {
+        const changeID = foodItems[index].id;
+        const newValue = !(foodItems[index].useThisWeek);
+        let newArray = foodItems.map(element => element.id == changeID ? { ...element, useThisWeek: newValue } : element);
+        setFoodItems(newArray);
+
+        FoodManagerDataService.updateUseThisWeek(changeID, newValue)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
     useEffect(() => {
         retrieveFoodItems();
     }, []);
@@ -82,16 +98,17 @@ const AboutToExpire = ({ navigation }) => {
                                 <Text>{foodItem.name}</Text>
                                 <Text>{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</Text>
                             </View>
-                            <Button style={{ backgroundColor: "gray" }} raised onPress={() => console.log('Pressed')}>
-                                ✓
-                            </Button>
+                            <AddToMealPlanButton 
+                                index={index}
+                                value={foodItem.useThisWeek}
+                                changeUseThisWeekValue={changeUseThisWeekValue}
+                            />
                         </View>
                         : null
                 ))}
             {/* <Button style={{ backgroundColor: "green" }} raised onPress={() => console.log('Pressed')}>
                 Add
             </Button> */}
-            <ModalContainer />
         </View>
     )
 }

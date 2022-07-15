@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import FoodManagerDataService from "../../services/FoodManagerDataService";
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
+import ModalContainer from '../components/ModalContainer.js';
+import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
 
 const MyPantry = ({ navigation }) => {
 
@@ -44,6 +46,21 @@ const MyPantry = ({ navigation }) => {
         return (Math.floor((expDateTime - today) / (24 * 3600 * 1000)) + 1);
     };
 
+    const changeUseThisWeekValue = (index) => {
+        const changeID = foodItems[index].id;
+        const newValue = !(foodItems[index].useThisWeek);
+        let newArray = foodItems.map(element => element.id == changeID ? { ...element, useThisWeek: newValue } : element);
+        setFoodItems(newArray);
+
+        FoodManagerDataService.updateUseThisWeek(changeID, newValue)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
     useEffect(() => {
         retrieveFoodItems();
     }, []);
@@ -52,6 +69,7 @@ const MyPantry = ({ navigation }) => {
         <View style={styles.container}>
             <Text>My Pantry</Text>
             <Text>Select ✓ to add to weekly meal plan.</Text>
+            <ModalContainer />
             {foodItems &&
                 foodItems.map((foodItem, index) => (
                         <View key={index} style={{ flexDirection: "row", alignItems: "center", width: 350 }}>
@@ -59,9 +77,11 @@ const MyPantry = ({ navigation }) => {
                                 <Text>{foodItem.name}</Text>
                                 <Text>{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</Text>
                             </View>
-                            <Button style={{ backgroundColor: "gray" }} raised onPress={() => console.log('Pressed')}>
-                                ✓
-                            </Button>
+                            <AddToMealPlanButton 
+                                index={index}
+                                value={foodItem.useThisWeek}
+                                changeUseThisWeekValue={changeUseThisWeekValue}
+                            />
                             <Button style={{ backgroundColor: "gray" }} raised onPress={() => console.log('Pressed')}>
                                 Update
                             </Button>
