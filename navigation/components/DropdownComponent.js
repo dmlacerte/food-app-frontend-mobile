@@ -3,35 +3,22 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
-  { label: 'Item 5', value: '5' },
-  { label: 'Item 6', value: '6' },
-  { label: 'Item 7', value: '7' },
-  { label: 'Item 8', value: '8' },
-];
-
-const DropdownComponent = () => {
+const DropdownComponent = ({ setExpDateRange }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-          Dropdown label
-        </Text>
-      );
-    }
-    return null;
-  };
+  const data = [
+    { label: '1', value: '1' },
+    { label: '2', value: '2' },
+    { label: '3', value: '3' },
+    { label: '4', value: '4' },
+    { label: '5', value: '5' },
+    { label: '6', value: '6' },
+    { label: '7', value: '7' },
+  ];
 
   return (
     <View style={styles.container}>
-      {renderLabel()}
       <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
         placeholderStyle={styles.placeholderStyle}
@@ -43,7 +30,7 @@ const DropdownComponent = () => {
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={!isFocus ? 'Select item' : '...'}
+        placeholder={!isFocus ? '7' : '...'}
         searchPlaceholder="Search..."
         value={value}
         onFocus={() => setIsFocus(true)}
@@ -51,15 +38,17 @@ const DropdownComponent = () => {
         onChange={item => {
           setValue(item.value);
           setIsFocus(false);
+          setExpDateRange(item.value);
         }}
-        renderLeftIcon={() => (
-          <AntDesign
-            style={styles.icon}
-            color={isFocus ? 'blue' : 'black'}
-            name="Safety"
-            size={20}
-          />
-        )}
+        // renderLeftIcon={() => (
+        //   // <AntDesign
+        //   //   style={styles.icon}
+        //   //   color={isFocus ? 'blue' : 'black'}
+        //   //   name="Safety"
+        //   //   size={20}
+        //   // />
+        //   value
+        // )}
       />
     </View>
   );
@@ -71,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     padding: 16,
+    width: 100,
   },
   dropdown: {
     height: 50,

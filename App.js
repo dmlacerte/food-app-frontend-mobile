@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import AboutToExpire from './navigation/screens/AboutToExpire.js';
 import MyGrocery from './navigation/screens/MyGrocery.js';
@@ -16,8 +17,18 @@ const pantryName = 'Pantry';
 
 const Tab = createBottomTabNavigator();
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'white',
+    accent: 'gray',
+  },
+};
+
 export default function App() {
   return (
+    <PaperProvider theme={theme}>
     <NavigationContainer>
       <Tab.Navigator 
         initialRouteName={pantryName}
@@ -54,5 +65,6 @@ export default function App() {
       
       </Tab.Navigator>
     </NavigationContainer>
+    </PaperProvider>
   );
 }

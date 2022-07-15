@@ -6,12 +6,23 @@ import RenderHtml from 'react-native-render-html';
 import { Dropdown } from 'react-native-material-dropdown';
 import FoodManagerDataService from "../../services/FoodManagerDataService";
 import DropdownComponent from '../components/DropdownComponent.js';
+import ModalContainer from '../components/ModalContainer.js';
+import { Button } from 'react-native-paper';
+import CardComponent from '../components/CardComponent.js'
+import {
+    Card,
+    CardActions,
+    CardContent,
+    CardCover,
+    Title,
+    Paragraph
+} from 'react-native-paper';
 
 const AboutToExpire = ({ navigation }) => {
 
-    const [foodItems, setFoodItems] = useState([{ name: "Test" }]);
+    const [foodItems, setFoodItems] = useState([]);
     const [expDateRange, setExpDateRange] = useState(7);
-    const potentialDates = [1, 2, 3, 4, 5, 6, 7];
+    // const potentialDates = [1, 2, 3, 4, 5, 6, 7];
 
     const compareItems = (a, b) => {
         const itemA = a.name.toUpperCase();
@@ -53,16 +64,34 @@ const AboutToExpire = ({ navigation }) => {
         retrieveFoodItems();
     }, []);
 
-    const { width } = useWindowDimensions();
+    // const { width } = useWindowDimensions();
 
     return (
         <View style={styles.container}>
             <Text>Use It or Lose It</Text>
             <Text>Select date range for expiring food:</Text>
-            <DropdownComponent />
-            {foodItems && foodItems.map((foodItem, index) => (
-                <Text key={index}>{foodItem.name}</Text>
-            ))}
+            <DropdownComponent
+                setExpDateRange={setExpDateRange}
+            />
+            <Text>Select ✓ to add to weekly meal plan.</Text>
+            {foodItems &&
+                foodItems.map((foodItem, index) => (
+                    calcDate(foodItem.expDate) <= expDateRange ?
+                        <View key={index} style={{ flexDirection: "row", alignItems: "center", width: 350 }}>
+                            <View>
+                                <Text>{foodItem.name}</Text>
+                                <Text>{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</Text>
+                            </View>
+                            <Button style={{ backgroundColor: "gray" }} raised onPress={() => console.log('Pressed')}>
+                                ✓
+                            </Button>
+                        </View>
+                        : null
+                ))}
+            {/* <Button style={{ backgroundColor: "green" }} raised onPress={() => console.log('Pressed')}>
+                Add
+            </Button> */}
+            <ModalContainer />
         </View>
     )
 }
@@ -74,6 +103,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    // flexContainer: {
+    //     flex: 1,
+    //     padding: 2,
+    //   }
 });
 
 export default AboutToExpire;
