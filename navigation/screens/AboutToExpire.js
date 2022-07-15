@@ -85,19 +85,21 @@ const AboutToExpire = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text>Use It or Lose It</Text>
+            <Text style={styles.pageTitle}>Use It or Lose It</Text>
             <Text>Select date range for expiring food:</Text>
             <DropdownComponent
                 setExpDateRange={setExpDateRange}
             />
-            <Text>Select ✓ to add to weekly meal plan.</Text>
+            <Text style={styles.subtext}>Select ✓ to add to weekly meal plan.</Text>
             {foodItems &&
                 foodItems.map((foodItem, index) => (
                     calcDate(foodItem.expDate) <= expDateRange ?
-                        <View key={index} style={{ flexDirection: "row", alignItems: "center", width: 350 }}>
+                        <View key={index} style={styles.foodItemContainer}>
                             <View>
                                 <Text>{foodItem.name}</Text>
-                                <Text>{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</Text>
+                                <Text style={styles.subtext}>
+                                    {foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}
+                                </Text>
                             </View>
                             <AddToMealPlanButton 
                                 index={index}
