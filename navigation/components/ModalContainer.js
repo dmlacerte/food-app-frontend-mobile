@@ -110,7 +110,7 @@ function ModalTester() {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View>
             {/* <Button title="Show modal" onPress={toggleModal} /> */}
             <Button style={{ backgroundColor: "green" }} raised onPress={toggleModal}>
                 Add

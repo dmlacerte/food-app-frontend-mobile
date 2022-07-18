@@ -4,12 +4,24 @@ import FoodManagerDataService from "../../services/FoodManagerDataService";
 import { StyleSheet, View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import ModalContainer from '../components/ModalContainer.js';
+import DropdownComponent from '../components/DropdownComponent.js';
 import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
 import styles from '../../Styles';
 
 const MyPantry = ({ navigation }) => {
 
     const [foodItems, setFoodItems] = useState([]);
+    const [selectedType, setSelectedType] = useState(null);
+    const dropdownData = [
+        { label: 'All', value: 'All' },
+        { label: 'Vegetable', value: 'Vegetable' },
+        { label: 'Fruit', value: 'Fruit' },
+        { label: 'Meat', value: 'Meat' },
+        { label: 'Dairy', value: 'Dairy' },
+        { label: 'Frozen', value: 'Frozen' },
+        { label: 'Packaged', value: 'Packaged' },
+        { label: 'Misc', value: 'Misc' },
+    ];
 
     const compareItems = (a, b) => {
         const itemA = a.name.toUpperCase();
@@ -32,6 +44,17 @@ const MyPantry = ({ navigation }) => {
                 if (newFoodItems.length > 0) newFoodItems.sort(compareItems);
                 setFoodItems(newFoodItems);
                 console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    };
+
+    const removeAllFoodItems = () => {
+        FoodManagerDataService.removeAll()
+            .then(response => {
+                console.log(response.data);
+                retrieveFoodItems();
             })
             .catch(e => {
                 console.log(e);
@@ -65,28 +88,46 @@ const MyPantry = ({ navigation }) => {
     useEffect(() => {
         retrieveFoodItems();
     }, []);
-    
+
     return (
         <View style={styles.container}>
-            <Text>My Pantry</Text>
-            <Text>Select ✓ to add to weekly meal plan.</Text>
-            <ModalContainer />
-            {foodItems &&
+            <Text style={styles.pageTitle}>My Pantry</Text>
+            <View style={{ flexDirection: "row" }}>
+                <DropdownComponent
+                    updateFunction={setSelectedType}
+                    dropdownData={dropdownData}
+                    placeholder='Select type'
+                    width={150}
+                />
+            </View>
+            <Text style={styles.pantrySubtext}>Select ✓ to add to weekly meal plan.</Text>
+            <View style={{ flexDirection: "row" }}>
+                <ModalContainer />
+                <Button style={{ backgroundColor: "red", marginLeft: 5 }} raised onPress={() => removeAllFoodItems()}>
+                    Remove All
+                </Button>
+            </View>
+            {foodItems.length > 0 &&
                 foodItems.map((foodItem, index) => (
-                        <View key={index} style={{ flexDirection: "row", alignItems: "center", width: 350 }}>
+                    !selectedType || selectedType === 'All' || selectedType === foodItem.type ?
+                        <View key={index} style={styles.foodItemContainer}>
                             <View>
                                 <Text>{foodItem.name}</Text>
-                                <Text>{foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}</Text>
+                                <Text style={styles.subtext}>{foodItem.type} </Text>
+                                <Text style={styles.subtext}>Days to Exp: {calcDate(foodItem.expDate)}</Text>
                             </View>
-                            <AddToMealPlanButton 
-                                index={index}
-                                value={foodItem.useThisWeek}
-                                changeUseThisWeekValue={changeUseThisWeekValue}
-                            />
-                            <Button style={{ backgroundColor: "gray" }} raised onPress={() => console.log('Pressed')}>
-                                Update
-                            </Button>
+                            <View style={{ flexDirection: "row" }}>
+                                <AddToMealPlanButton
+                                    index={index}
+                                    value={foodItem.useThisWeek}
+                                    changeUseThisWeekValue={changeUseThisWeekValue}
+                                />
+                                <Button style={{ backgroundColor: "gray", marginLeft: 5 }} raised onPress={() => console.log('Pressed')}>
+                                    Update
+                                </Button>
+                            </View>
                         </View>
+                        : null
                 ))}
         </View>
     )

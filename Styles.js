@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
     },
     subtext: {
         color: "gray",
+    },
+    pantrySubtext: {
+        color: "gray",
+        marginBottom: 5,
     }
 });
 
