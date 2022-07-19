@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const DropdownComponent = ({ updateFunction, dropdownData, placeholder, width }) => {
+const DropdownComponent = ({ updateFunction, updateForm, dropdownData, placeholder, width }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -69,7 +69,8 @@ const DropdownComponent = ({ updateFunction, dropdownData, placeholder, width })
         onChange={item => {
           setValue(item.value);
           setIsFocus(false);
-          updateFunction(item.value);
+          updateFunction ? updateFunction(item.value) : null;
+          updateForm ? updateForm('type', item.value) : null;
         }}
         // renderLeftIcon={() => (
         //   // <AntDesign

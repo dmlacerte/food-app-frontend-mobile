@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
 import FoodManagerDataService from "../../services/FoodManagerDataService";
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import ModalContainer from '../components/ModalContainer.js';
 import DropdownComponent from '../components/DropdownComponent.js';
@@ -102,7 +102,9 @@ const MyPantry = ({ navigation }) => {
             </View>
             <Text style={styles.pantrySubtext}>Select ✓ to add to weekly meal plan.</Text>
             <View style={{ flexDirection: "row" }}>
-                <ModalContainer />
+                <ModalContainer 
+                    triggerText="Add"
+                />
                 <Button style={{ backgroundColor: "red", marginLeft: 5 }} raised onPress={() => removeAllFoodItems()}>
                     Remove All
                 </Button>
