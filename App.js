@@ -29,42 +29,66 @@ const theme = {
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-    <NavigationContainer>
-      <Tab.Navigator 
-        initialRouteName={pantryName}
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-            let routeName = route.name;
+      <NavigationContainer>
+        <Tab.Navigator
+          initialRouteName={pantryName}
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              let routeName = route.name;
 
-            if (routeName === expireName) {
-              iconName = focused ? 'pizza' : 'pizza-outline';
-            } else if (routeName === groceryName) {
-              iconName = focused ? 'cart' : 'cart-outline';
-            } else if (routeName === mealPlanName) {
-              iconName = focused ? 'list' : 'list-outline';
-            } else if (routeName === pantryName) {
-              iconName = focused ? 'home' : 'home-outline';
+              if (routeName === expireName) {
+                iconName = focused ? 'pizza' : 'pizza-outline';
+              } else if (routeName === groceryName) {
+                iconName = focused ? 'cart' : 'cart-outline';
+              } else if (routeName === mealPlanName) {
+                iconName = focused ? 'list' : 'list-outline';
+              } else if (routeName === pantryName) {
+                iconName = focused ? 'home' : 'home-outline';
+              }
+
+              return <Ionicons name={iconName} size={size} color={color} />
             }
+          })}
+          tabBarOptions={{
+            activeTintColor: 'black',
+            inactiveTintColor: 'gray',
+            labelStyle: { paddingBottom: 10, fontSize: 10 },
+            style: { padding: 10, height: 70 }
+          }}
+        >
 
-            return <Ionicons name={iconName} size={size} color={color}/>
-          }
-        })}
-        tabBarOptions={{
-          activeTintColor: 'black',
-          inactiveTintColor: 'gray',
-          labelStyle: { paddingBottom: 10, fontSize: 10 },
-          style: { padding: 10, height: 70 }
-        }}
-      >
+          <Tab.Screen
+            options={{
+              unmountOnBlur: true,
+            }}
+            name={pantryName}
+            component={MyPantry}
+          />
+          <Tab.Screen 
+            options={{
+              unmountOnBlur: true,
+            }}
+            name={expireName} 
+            component={AboutToExpire} 
+          />
+          <Tab.Screen 
+            options={{
+              unmountOnBlur: true,
+            }}
+            name={groceryName} 
+            component={MyGrocery} 
+          />
+          <Tab.Screen 
+            options={{
+              unmountOnBlur: true,
+            }}
+            name={mealPlanName} 
+            component={MyMealPlan} 
+          />
 
-        <Tab.Screen name={pantryName} component={MyPantry} />
-        <Tab.Screen name={expireName} component={AboutToExpire} />
-        <Tab.Screen name={groceryName} component={MyGrocery} />
-        <Tab.Screen name={mealPlanName} component={MyMealPlan} />
-      
-      </Tab.Navigator>
-    </NavigationContainer>
+        </Tab.Navigator>
+      </NavigationContainer>
     </PaperProvider>
   );
 }

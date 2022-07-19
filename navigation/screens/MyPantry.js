@@ -62,7 +62,7 @@ const MyPantry = ({ navigation }) => {
     };
 
     const calcDate = (expDateStr) => {
-        const expDate = new Date(expDateStr);
+        const expDate = new Date(expDateStr.replace(/-/g, '\/'));
         const expDateTime = expDate.getTime();
 
         const today = new Date();
@@ -102,8 +102,9 @@ const MyPantry = ({ navigation }) => {
             </View>
             <Text style={styles.pantrySubtext}>Select ✓ to add to weekly meal plan.</Text>
             <View style={{ flexDirection: "row" }}>
-                <ModalContainer 
+                <ModalContainer
                     triggerText="Add"
+                    retrieveItems={retrieveFoodItems}
                 />
                 <Button style={{ backgroundColor: "red", marginLeft: 5 }} raised onPress={() => removeAllFoodItems()}>
                     Remove All
@@ -124,9 +125,11 @@ const MyPantry = ({ navigation }) => {
                                     value={foodItem.useThisWeek}
                                     changeUseThisWeekValue={changeUseThisWeekValue}
                                 />
-                                <Button style={{ backgroundColor: "gray", marginLeft: 5 }} raised onPress={() => console.log('Pressed')}>
-                                    Update
-                                </Button>
+                                <ModalContainer
+                                    id={foodItem.id}
+                                    triggerText="Update"
+                                    retrieveItems={retrieveFoodItems}
+                                />
                             </View>
                         </View>
                         : null
