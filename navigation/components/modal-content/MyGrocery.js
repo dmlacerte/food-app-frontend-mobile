@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
-import FoodManagerDataService from "../../../services/FoodManagerDataService";
+import GroceryManagerDataService from "../../../services/GroceryManagerDataService";
 import DropdownComponent from '../../components/DropdownComponent.js';
 import { View, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import DatePicker from 'react-native-date-picker';
 
-const MyFood = ({ id, closeModal }) => {
+const MyGrocery = ({ id, closeModal }) => {
 
-    const initialFoodState = {
+    const initialGroceryState = {
         id: null,
         name: "",
         type: ""
     };
 
-    const [currentFood, setCurrentFood] = useState(initialFoodState);
-    const [date, setDate] = useState(new Date());
+    const [currentGrocery, setCurrentGrocery] = useState(initialGroceryState);
     const dropdownData = [
         { label: 'Vegetable', value: 'Vegetable' },
         { label: 'Fruit', value: 'Fruit' },
@@ -25,14 +23,11 @@ const MyFood = ({ id, closeModal }) => {
         { label: 'Misc', value: 'Misc' },
     ];
 
-    const getFood = foodID => {
-        FoodManagerDataService.get(foodID)
+    const getGrocery = groceryID => {
+        GroceryManagerDataService.get(groceryID)
             .then(response => {
-                setCurrentFood(response.data);
+                setCurrentGrocery(response.data);
                 console.log(response.data);
-
-                const expDate = new Date(response.data.expDate.replace(/-/g, '\/'));
-                setDate(expDate);
             })
             .catch(e => {
                 console.log(e);
@@ -40,13 +35,11 @@ const MyFood = ({ id, closeModal }) => {
     };
 
     const handleInputChange = (name, value) => {
-        if (name === "useThisWeek") value = !food.useThisWeek;
-
-        setCurrentFood({ ...currentFood, [name]: value });
+        setCurrentGrocery({ ...currentGrocery, [name]: value });
     };
 
-    const updateFood = () => {
-        FoodManagerDataService.update(currentFood.id, currentFood)
+    const updateGrocery = () => {
+        GroceryManagerDataService.update(currentGrocery.id, currentGrocery)
             .then(response => {
                 console.log(response.data);
                 closeModal();
@@ -56,8 +49,8 @@ const MyFood = ({ id, closeModal }) => {
             });
     };
 
-    const deleteFood = () => {
-        FoodManagerDataService.remove(currentFood.id)
+    const deleteGrocery = () => {
+        GroceryManagerDataService.remove(currentGrocery.id)
             .then(response => {
                 console.log(response.data);
                 closeModal();
@@ -69,42 +62,34 @@ const MyFood = ({ id, closeModal }) => {
 
     useEffect(() => {
         if (id)
-            getFood(id);
+            getGrocery(id);
     }, [id]);
 
     return (
         <View>
-            <Text>Edit Pantry Item</Text>
+            <Text>Edit Grocery Item</Text>
             <TextInput
                 label='Name'
-                value={currentFood.name}
+                value={currentGrocery.name}
                 onChangeText={text => handleInputChange('name', text)}
             />
             <DropdownComponent
                 updateForm={handleInputChange}
                 dropdownData={dropdownData}
-                placeholder={currentFood.type}
+                placeholder={currentGrocery.type}
                 width={150}
-            />
-            <DatePicker
-                mode="date"
-                date={date}
-                onDateChange={newDate => {
-                    setDate(newDate);
-                    handleInputChange('expDate', newDate);
-                }}
             />
             <Button
                 style={{ backgroundColor: "green" }}
                 raised
-                onPress={updateFood}
+                onPress={updateGrocery}
             >
                 Update
             </Button>
             <Button
                 style={{ backgroundColor: "green" }}
                 raised
-                onPress={deleteFood}
+                onPress={deleteGrocery}
             >
                 Delete
             </Button>
@@ -112,4 +97,4 @@ const MyFood = ({ id, closeModal }) => {
     );
 };
 
-export default MyFood;
+export default MyGrocery;

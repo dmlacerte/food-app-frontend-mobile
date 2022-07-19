@@ -2,12 +2,12 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import styles from '../../Styles';
 
-const MyGrocery = ({ navigation }) => {
+const MealPlan = () => {
     return (
         <View style={styles.container}>
-            <Text>Grocery Page</Text>
+            <Text>Meal Plan Page</Text>
         </View>
     )
 }
 
-export default MyGrocery; 
+export default MealPlan; 

@@ -8,7 +8,7 @@ import DropdownComponent from '../components/DropdownComponent.js';
 import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
 import styles from '../../Styles';
 
-const MyPantry = ({ navigation }) => {
+const Pantry = () => {
 
     const [foodItems, setFoodItems] = useState([]);
     const [selectedType, setSelectedType] = useState(null);
@@ -138,4 +138,4 @@ const MyPantry = ({ navigation }) => {
     )
 }
 
-export default MyPantry; 
+export default Pantry; 

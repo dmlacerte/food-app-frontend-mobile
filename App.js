@@ -6,9 +6,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import AboutToExpire from './navigation/screens/AboutToExpire.js';
-import MyGrocery from './navigation/screens/MyGrocery.js';
-import MyMealPlan from './navigation/screens/MyMealPlan.js';
-import MyPantry from './navigation/screens/MyPantry.js';
+import MyGrocery from './navigation/screens/Grocery.js';
+import MyMealPlan from './navigation/screens/MealPlan.js';
+import MyPantry from './navigation/screens/Pantry.js';
 
 const expireName = 'Expiring';
 const groceryName = 'Grocery';

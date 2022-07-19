@@ -20,7 +20,7 @@ import {
     Paragraph
 } from 'react-native-paper';
 
-const AboutToExpire = ({ navigation }) => {
+const AboutToExpire = () => {
 
     const [foodItems, setFoodItems] = useState([]);
     const [expDateRange, setExpDateRange] = useState(7);
@@ -96,7 +96,7 @@ const AboutToExpire = ({ navigation }) => {
             <Text style={styles.pageTitle}>Use It or Lose It</Text>
             <Text>Select date range for expiring food:</Text>
             <DropdownComponent
-                setExpDateRange={setExpDateRange}
+                updateFunction={setExpDateRange}
                 dropdownData={dropdownData}
                 placeholder='7'
                 width={100}
