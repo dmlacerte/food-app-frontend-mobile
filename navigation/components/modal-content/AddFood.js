@@ -58,9 +58,7 @@ const AddFood = ({ id }) => {
                     deleteGroceryItem();
 
                     let newcheckedGroceryIDs = [...checkedGroceryIDs];
-                    console.log(newcheckedGroceryIDs)
                     newcheckedGroceryIDs.shift();
-                    console.log(newcheckedGroceryIDs)
                     setCheckedGroceryIDs(newcheckedGroceryIDs);
                 }
 

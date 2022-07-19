@@ -155,12 +155,30 @@ const Grocery = () => {
                 <Text style={styles.pageTitle}>Grocery</Text>
                 {groceryItems.length > 0 && groceryItems.map((groceryItem, index) => (
                     <View key={index} style={styles.foodItemContainer}>
-                        {/* <TouchableHighlight onPress={() => updateSelectedPantryIDs(groceryItem.id)}>
-
-                        </TouchableHighlight> */}
-                        <View>
-                            <Text>{groceryItem.name}</Text>
-                            <Text style={styles.subtext}>{groceryItem.type} </Text>
+                        <View style={{ flexDirection: "row", alignItems: "center" }}>
+                            <TouchableHighlight
+                                onPress={() => updateSelectedGroceryIDs(groceryItem.id)}
+                                style={{
+                                    backgroundColor: checkedGroceryIDs.includes(groceryItem.id) ? "lightgray" : "white",
+                                    width: 17,
+                                    height: 17,
+                                    borderWidth: 1,
+                                    borderColor: "black",
+                                    flexDirection: "row",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    marginRight: 5,
+                                }}
+                            >
+                                {checkedGroceryIDs.includes(groceryItem.id)
+                                    ? <Text>✓</Text>
+                                    : <Text> </Text>
+                                }
+                            </TouchableHighlight>
+                            <View>
+                                <Text>{groceryItem.name}</Text>
+                                <Text style={styles.subtext}>{groceryItem.type}</Text>
+                            </View>
                         </View>
                         <View style={{ flexDirection: "row" }}>
                             <ModalContainer
@@ -178,11 +196,32 @@ const Grocery = () => {
                     foodItems.map((foodItem, index) => (
                         foodItem.useThisWeek ?
                             <View key={index} style={styles.foodItemContainer}>
-                                <View>
-                                    <Text>{foodItem.name}</Text>
-                                    <Text style={styles.subtext}>
-                                        {foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}
-                                    </Text>
+                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                    <TouchableHighlight
+                                        onPress={() => updateSelectedGroceryIDs(foodItem.id)}
+                                        style={{
+                                            backgroundColor: checkedGroceryIDs.includes(foodItem.id) ? "lightgray" : "white",
+                                            width: 17,
+                                            height: 17,
+                                            borderWidth: 1,
+                                            borderColor: "black",
+                                            flexDirection: "row",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            marginRight: 5,
+                                        }}
+                                    >
+                                        {checkedGroceryIDs.includes(foodItem.id)
+                                            ? <Text>✓</Text>
+                                            : <Text> </Text>
+                                        }
+                                    </TouchableHighlight>
+                                    <View>
+                                        <Text>{foodItem.name}</Text>
+                                        <Text style={styles.subtext}>
+                                            {foodItem.type} | Days to Exp: {calcDate(foodItem.expDate)}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
                             : null
