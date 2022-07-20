@@ -246,7 +246,7 @@ const Grocery = () => {
                     ))}
                 {checkedPantryIDs.length > 0
                     ? <View>
-                        <Button style={{ borderWidth: 1, borderColor: "gray" }} onPress={removeFromWeeklyPlan}>
+                        <Button style={{ borderWidth: 1, borderColor: "gray", marginTop: 10 }} onPress={removeFromWeeklyPlan}>
                             <Text>Remove From Weekly Plan</Text>
                         </Button>
                         <Button style={{ borderWidth: 1, borderColor: "gray", marginTop: 5 }} onPress={removeFromPantry}>
