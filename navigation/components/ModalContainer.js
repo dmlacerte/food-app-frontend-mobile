@@ -43,10 +43,13 @@ function ModalContainer({ triggerText, retrieveItems, id }) {
             </Button>
 
             <Modal isVisible={isModalVisible}>
-                <View style={{ flex: 1, backgroundColor: "white", padding: 30 }}>
+                <View style={{ flex: 1, backgroundColor: "white", padding: 32 }}>
                     {determineModal}
-                    <TouchableHighlight style={{ backgroundColor: "lightgray", top: 0, right: 0, position: "absolute", width: 20, height: 20, alignItems: 'center' }} onPress={toggleModal}>
-                        <Text>X</Text>
+                    <TouchableHighlight 
+                        style={{ backgroundColor: "lightgray", top: 0, right: 0, position: "absolute", width: 30, height: 30, flexDirection: "row", justifyContent: "center" }} 
+                        onPress={toggleModal}
+                    >
+                        <Text style={{ alignSelf: "center" }}>X</Text>
                     </TouchableHighlight>
                 </View>
             </Modal>

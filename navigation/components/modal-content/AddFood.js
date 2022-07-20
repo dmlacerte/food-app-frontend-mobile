@@ -12,7 +12,7 @@ const AddFood = ({ id }) => {
         id: null,
         name: "",
         type: "Misc",
-        expDate: "",
+        expDate: new Date(),
         useThisWeek: false
     };
 
@@ -104,7 +104,7 @@ const AddFood = ({ id }) => {
 
     useEffect(() => {
         checkForGrocery();
-    }, [submitted]);
+    }, [checkedGroceryIDs]);
 
     return (
         submitted && (!checkedGroceryIDs || checkedGroceryIDs.length === 0)
@@ -132,7 +132,7 @@ const AddFood = ({ id }) => {
                     <DropdownComponent
                         updateForm={handleInputChange}
                         dropdownData={dropdownData}
-                        placeholder=''
+                        placeholder={food.type}
                         width={150}
                     />
                 </View>

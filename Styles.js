@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         padding: 10,
         color: "white",
+        width: 350,
     },
     subtext: {
         color: "gray",

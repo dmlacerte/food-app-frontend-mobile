@@ -71,7 +71,7 @@ const MyFood = ({ id, closeModal }) => {
     useEffect(() => {
         if (id)
             getFood(id);
-    }, [id]);
+    }, []);
 
     return (
         <View>

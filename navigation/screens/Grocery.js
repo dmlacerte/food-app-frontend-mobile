@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
 import { TouchableHighlight, View, Text } from 'react-native';
+import { Button } from 'react-native-paper';
 import styles from '../../Styles';
 import ModalContainer from '../components/ModalContainer.js';
 import FoodManagerDataService from "../../services/FoodManagerDataService";
@@ -162,14 +163,14 @@ const Grocery = () => {
                                 onPress={() => updateSelectedGroceryIDs(groceryItem.id)}
                                 style={{
                                     backgroundColor: checkedGroceryIDs.includes(groceryItem.id) ? "lightgray" : "white",
-                                    width: 17,
-                                    height: 17,
+                                    width: 30,
+                                    height: 30,
                                     borderWidth: 1,
                                     borderColor: "black",
                                     flexDirection: "row",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    marginRight: 5,
+                                    marginRight: 10,
                                 }}
                             >
                                 {checkedGroceryIDs.includes(groceryItem.id)
@@ -191,21 +192,21 @@ const Grocery = () => {
                         </View>
                     </View>
                 ))}
-                { checkedGroceryIDs.length > 0 
-                ? <View>
-                    <TouchableHighlight
-                        onPress={() => {
-                            retrieveGroceryItems();
-                            retrieveFoodItems();
-                        }}
-                    >
-                        <Text>Add to Pantry</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={removeFromGroceryList}>
-                        <Text>Remove From Grocery List</Text>
-                    </TouchableHighlight>
-                </View>
-                : null }
+                {checkedGroceryIDs.length > 0
+                    ? <View style={{ justifyContent: "space-evenly", marginTop: 10 }}>
+                        <ModalContainer
+                            id={checkedGroceryIDs}
+                            triggerText="Add to Pantry"
+                            retrieveItems={() => {
+                                retrieveGroceryItems();
+                                retrieveFoodItems();
+                            }}
+                        />
+                        <Button style={{ borderWidth: 1, borderColor: "gray", marginTop: 5 }} onPress={removeFromGroceryList}>
+                            <Text>Remove From Grocery List</Text>
+                        </Button>
+                    </View>
+                    : null}
             </View>
             <View>
                 <Text style={styles.subTitle}>Pantry</Text>
@@ -218,14 +219,14 @@ const Grocery = () => {
                                         onPress={() => updateSelectedPantryIDs(foodItem.id)}
                                         style={{
                                             backgroundColor: checkedPantryIDs.includes(foodItem.id) ? "lightgray" : "white",
-                                            width: 20,
-                                            height: 20,
+                                            width: 30,
+                                            height: 30,
                                             borderWidth: 1,
                                             borderColor: "black",
                                             flexDirection: "row",
                                             justifyContent: "center",
                                             alignItems: "center",
-                                            marginRight: 5,
+                                            marginRight: 10,
                                         }}
                                     >
                                         {checkedPantryIDs.includes(foodItem.id)
@@ -243,16 +244,16 @@ const Grocery = () => {
                             </View>
                             : null
                     ))}
-                    { checkedPantryIDs.length > 0 
-                ? <View>
-                    <TouchableHighlight onPress={removeFromWeeklyPlan}>
-                        <Text>Remove From Weekly Plan</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight onPress={removeFromPantry}>
-                        <Text>Remove From Pantry</Text>
-                    </TouchableHighlight>
-                </View>
-                : null }
+                {checkedPantryIDs.length > 0
+                    ? <View>
+                        <Button style={{ borderWidth: 1, borderColor: "gray" }} onPress={removeFromWeeklyPlan}>
+                            <Text>Remove From Weekly Plan</Text>
+                        </Button>
+                        <Button style={{ borderWidth: 1, borderColor: "gray", marginTop: 5 }} onPress={removeFromPantry}>
+                            <Text>Remove From Pantry</Text>
+                        </Button>
+                    </View>
+                    : null}
             </View>
         </View>
     )

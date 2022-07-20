@@ -64,7 +64,7 @@ const MyGrocery = ({ id, closeModal }) => {
     useEffect(() => {
         if (id)
             getGrocery(id);
-    }, [id]);
+    }, []);
 
     return (
         <View>
