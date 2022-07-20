@@ -57,6 +57,30 @@ const styles = StyleSheet.create({
     mealPlanRow: {
         flexDirection: "row", 
         width: 350,
+        minHeight: 75,
+        borderWidth: 1, 
+        borderColor: "lightgray",
+        marginBottom: 5,
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    addButton: {
+        borderWidth: 1, 
+        borderColor: "green",
+    },
+    editButton: {
+        borderWidth: 1, 
+        borderColor: "gray",
+    },
+    mealPlanSpace: {
+        width: 240,
+        minHeight: 75,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    mealPlanCategory: {
+        fontWeight: 'bold',
+        paddingLeft: 5,
     }
 });
 

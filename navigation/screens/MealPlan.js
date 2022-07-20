@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import { TouchableHighlight, View, Text, Touchable } from 'react-native';
+import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import styles from '../../Styles';
 import ModalContainer from '../components/ModalContainer.js';
@@ -59,7 +59,7 @@ const MealPlan = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.pageTitle}>Weekly Meal Planner</Text>
-            <Button style={{ borderWidth: 1, borderColor: "red", marginLeft: 5 }} raised onPress={() => removeAllMealPlanItems()}>
+            <Button style={{ borderWidth: 1, borderColor: "red", marginLeft: 5 }} raised onPress={removeAllMealPlanItems}>
                 Remove All
             </Button>
             <View style={{ flexDirection: "row" }}>
@@ -72,7 +72,7 @@ const MealPlan = () => {
             </View>
             <View>
                 <View style={styles.mealPlanRow}>
-                    <Text>Breakfast</Text>
+                    <Text style={styles.mealPlanCategory}>BREAKFAST</Text>
                     <ModalContainer 
                         triggerText={findDescription('Breakfast')}
                         category="Meal Plan"
@@ -82,7 +82,7 @@ const MealPlan = () => {
                     />
                 </View>
                 <View style={styles.mealPlanRow}>
-                    <Text>Lunch</Text>
+                    <Text style={styles.mealPlanCategory}>LUNCH</Text>
                     <ModalContainer 
                         triggerText={findDescription('Lunch')}
                         category="Meal Plan"
@@ -92,17 +92,17 @@ const MealPlan = () => {
                     />
                 </View>
                 <View style={styles.mealPlanRow}>
-                    <Text>Dinner</Text>
+                    <Text style={styles.mealPlanCategory}>DINNER</Text>
                     <ModalContainer 
                         triggerText={findDescription('Dinner')}
                         category="Meal Plan"
                         day={selectedDay}
                         time="Dinner"
-                        retrieveItems={retrieveMealPlanItems}
+                        retrieveItems={retrieveMealPlanItems} 
                     />
                 </View>
                 <View style={styles.mealPlanRow}>
-                    <Text>Snacks</Text>
+                    <Text style={styles.mealPlanCategory}>SNACKS</Text>
                     <ModalContainer 
                         triggerText={findDescription('Snacks')}
                         category="Meal Plan"
