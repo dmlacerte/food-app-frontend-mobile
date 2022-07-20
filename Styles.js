@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 10,
         marginBottom: 10,
+    },
+    mealPlanRow: {
+        flexDirection: "row", 
+        width: 350,
     }
 });
 

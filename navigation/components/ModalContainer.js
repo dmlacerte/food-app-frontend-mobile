@@ -7,8 +7,10 @@ import MyFood from "./modal-content/MyFood";
 import MyGrocery from "./modal-content/MyGrocery";
 import AddGrocery from "./modal-content/AddGrocery";
 import AddWeeklyFood from "./modal-content/AddWeeklyFood";
+import MyPlan from "./modal-content/MyPlan";
+import AddMealPlan from "./modal-content/AddMealPlan";
 
-function ModalContainer({ triggerText, retrieveItems, id }) {
+function ModalContainer({ triggerText, retrieveItems, id, day, time, category }) {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -29,12 +31,11 @@ function ModalContainer({ triggerText, retrieveItems, id }) {
         determineModal = <AddGrocery />;
     } else if (triggerText === 'Add Pantry') {
         determineModal = <AddWeeklyFood />;
+    } else if (category === 'Meal Plan' && (triggerText || triggerText === "")) {
+        determineModal = <MyPlan day={day} time={time} closeModal={toggleModal} />;
+    } else if (category === 'Meal Plan') {
+        determineModal = <AddMealPlan day={day} time={time} closeModal={toggleModal} />;
     } 
-    // else if (category === 'Meal Plan' && (triggerText || triggerText === "")) {
-    //     determineModal = <MyPlan day={day} time={time} closeModal={closeModal} />;
-    // } else if (category === 'Meal Plan') {
-    //     determineModal = <AddMealPlan day={day} time={time} closeModal={closeModal} />;
-    // } 
 
     return (
         <View>
