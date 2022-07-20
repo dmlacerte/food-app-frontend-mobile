@@ -3,6 +3,7 @@ import GroceryManagerDataService from "../../../services/GroceryManagerDataServi
 import DropdownComponent from '../../components/DropdownComponent.js';
 import { View, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import styles from '../../../Styles';
 
 const AddGrocery = () => {
     const initialGroceryState = {
@@ -55,11 +56,11 @@ const AddGrocery = () => {
 
     return (
         submitted
-            ? <View>
-                <Text>You submitted successfully!</Text>
-                <Text>Click below to add another item.</Text>
+            ? <View style={{ alignItems: "center" }}>
+                <Text style={styles.modalText}>You submitted successfully!</Text>
+                <Text style={styles.subtext}>Click below to add more items.</Text>
                 <Button
-                    style={{ backgroundColor: "green" }}
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 200, marginTop: 20 }}
                     raised
                     onPress={newGrocery}
                 >
@@ -67,20 +68,24 @@ const AddGrocery = () => {
                 </Button>
             </View>
             : <View>
-                <Text>Add to Grocery List</Text>
+                <Text style={styles.pageTitle}>Add to Grocery List</Text>
+                <Text style={styles.modalCategory}>Name:</Text>
                 <TextInput
                     label='Name'
                     value={grocery.name}
                     onChangeText={text => handleInputChange('name', text)}
                 />
-                <DropdownComponent
-                    updateForm={handleInputChange}
-                    dropdownData={dropdownData}
-                    placeholder={grocery.type}
-                    width={150}
-                />
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.modalCategory}>Type:</Text>
+                    <DropdownComponent
+                        updateForm={handleInputChange}
+                        dropdownData={dropdownData}
+                        placeholder={grocery.type}
+                        width={150}
+                    />
+                </View>
                 <Button
-                    style={{ backgroundColor: "green" }}
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 100, alignSelf: "center", marginTop: 15 }}
                     raised
                     onPress={saveGrocery}
                 >

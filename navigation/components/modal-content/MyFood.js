@@ -4,6 +4,7 @@ import DropdownComponent from '../../components/DropdownComponent.js';
 import { View, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import DatePicker from 'react-native-date-picker';
+import styles from '../../../Styles';
 
 const MyFood = ({ id, closeModal }) => {
 
@@ -74,18 +75,23 @@ const MyFood = ({ id, closeModal }) => {
 
     return (
         <View>
-            <Text>Edit Pantry Item</Text>
+            <Text style={styles.pageTitle}>Edit Pantry Item</Text>
+            <Text style={styles.modalCategory}>Name:</Text>
             <TextInput
                 label='Name'
                 value={currentFood.name}
                 onChangeText={text => handleInputChange('name', text)}
             />
-            <DropdownComponent
-                updateForm={handleInputChange}
-                dropdownData={dropdownData}
-                placeholder={currentFood.type}
-                width={150}
-            />
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={styles.modalCategory}>Type:</Text>
+                <DropdownComponent
+                    updateForm={handleInputChange}
+                    dropdownData={dropdownData}
+                    placeholder={currentFood.type}
+                    width={150}
+                />
+            </View>
+            <Text style={styles.modalCategory}>Expiration Date:</Text>
             <DatePicker
                 mode="date"
                 date={date}
@@ -93,21 +99,24 @@ const MyFood = ({ id, closeModal }) => {
                     setDate(newDate);
                     handleInputChange('expDate', newDate);
                 }}
+                style={{ alignSelf: "center" }}
             />
-            <Button
-                style={{ backgroundColor: "green" }}
-                raised
-                onPress={updateFood}
-            >
-                Update
-            </Button>
-            <Button
-                style={{ backgroundColor: "green" }}
-                raised
-                onPress={deleteFood}
-            >
-                Delete
-            </Button>
+            <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 20 }}>
+                <Button
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 100 }}
+                    raised
+                    onPress={updateFood}
+                >
+                    Update
+                </Button>
+                <Button
+                    style={{ borderWidth: 1, backgroundColor: "indianred", width: 100, marginLeft: 5 }}
+                    raised
+                    onPress={deleteFood}
+                >
+                    Delete
+                </Button>
+            </View>
         </View>
     );
 };

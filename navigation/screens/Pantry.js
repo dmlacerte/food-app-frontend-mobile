@@ -106,7 +106,7 @@ const Pantry = () => {
                     triggerText="Add"
                     retrieveItems={retrieveFoodItems}
                 />
-                <Button style={{ backgroundColor: "red", marginLeft: 5 }} raised onPress={() => removeAllFoodItems()}>
+                <Button style={{ borderWidth: 1, borderColor: "red", marginLeft: 5 }} raised onPress={() => removeAllFoodItems()}>
                     Remove All
                 </Button>
             </View>

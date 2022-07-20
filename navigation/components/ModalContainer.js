@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { TouchableHighlight, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { Button } from 'react-native-paper';
 import AddFood from "./modal-content/AddFood";
@@ -38,16 +38,16 @@ function ModalContainer({ triggerText, retrieveItems, id }) {
 
     return (
         <View>
-            <Button style={{ backgroundColor: "green" }} raised onPress={toggleModal}>
+            <Button style={{ borderWidth: 1, borderColor: "green" }} raised onPress={toggleModal}>
                 {triggerText}
             </Button>
 
             <Modal isVisible={isModalVisible}>
-                <View style={{ flex: 1, backgroundColor: "white" }}>
+                <View style={{ flex: 1, backgroundColor: "white", padding: 30 }}>
                     {determineModal}
-                    <Button style={{ backgroundColor: "gray" }} raised onPress={toggleModal}>
-                        Close
-                    </Button>
+                    <TouchableHighlight style={{ backgroundColor: "lightgray", top: 0, right: 0, position: "absolute", width: 20, height: 20, alignItems: 'center' }} onPress={toggleModal}>
+                        <Text>X</Text>
+                    </TouchableHighlight>
                 </View>
             </Modal>
         </View>

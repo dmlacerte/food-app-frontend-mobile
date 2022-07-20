@@ -3,6 +3,7 @@ import GroceryManagerDataService from "../../../services/GroceryManagerDataServi
 import DropdownComponent from '../../components/DropdownComponent.js';
 import { View, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+import styles from '../../../Styles';
 
 const MyGrocery = ({ id, closeModal }) => {
 
@@ -67,32 +68,38 @@ const MyGrocery = ({ id, closeModal }) => {
 
     return (
         <View>
-            <Text>Edit Grocery Item</Text>
+            <Text style={styles.pageTitle}>Edit Grocery Item</Text>
+            <Text style={styles.modalCategory}>Name:</Text>
             <TextInput
                 label='Name'
                 value={currentGrocery.name}
                 onChangeText={text => handleInputChange('name', text)}
             />
-            <DropdownComponent
-                updateForm={handleInputChange}
-                dropdownData={dropdownData}
-                placeholder={currentGrocery.type}
-                width={150}
-            />
-            <Button
-                style={{ backgroundColor: "green" }}
-                raised
-                onPress={updateGrocery}
-            >
-                Update
-            </Button>
-            <Button
-                style={{ backgroundColor: "green" }}
-                raised
-                onPress={deleteGrocery}
-            >
-                Delete
-            </Button>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={styles.modalCategory}>Type:</Text>
+                <DropdownComponent
+                    updateForm={handleInputChange}
+                    dropdownData={dropdownData}
+                    placeholder={currentGrocery.type}
+                    width={150}
+                />
+            </View>
+            <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 20 }}>
+                <Button
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 100 }}
+                    raised
+                    onPress={updateGrocery}
+                >
+                    Update
+                </Button>
+                <Button
+                    style={{ borderWidth: 1, backgroundColor: "indianred", width: 100, marginLeft: 5 }}
+                    raised
+                    onPress={deleteGrocery}
+                >
+                    Delete
+                </Button>
+            </View>
         </View>
     );
 };

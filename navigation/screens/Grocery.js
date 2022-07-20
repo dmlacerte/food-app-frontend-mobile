@@ -141,18 +141,20 @@ const Grocery = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.pageTitle}>Food To Use This Week</Text>
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", marginTop: 10 }}>
                 <ModalContainer
                     triggerText="Add Grocery"
                     retrieveItems={retrieveGroceryItems}
                 />
-                <ModalContainer
-                    triggerText="Add Pantry"
-                    retrieveItems={retrieveFoodItems}
-                />
+                <View style={{ marginLeft: 5 }}>
+                    <ModalContainer
+                        triggerText="Add Pantry"
+                        retrieveItems={retrieveFoodItems}
+                    />
+                </View>
             </View>
             <View>
-                <Text style={styles.pageTitle}>Grocery</Text>
+                <Text style={styles.subTitle}>Grocery</Text>
                 {groceryItems.length > 0 && groceryItems.map((groceryItem, index) => (
                     <View key={index} style={styles.foodItemContainer}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -206,7 +208,7 @@ const Grocery = () => {
                 : null }
             </View>
             <View>
-                <Text style={styles.pageTitle}>Pantry</Text>
+                <Text style={styles.subTitle}>Pantry</Text>
                 {foodItems.length > 0 &&
                     foodItems.map((foodItem, index) => (
                         foodItem.useThisWeek ?
@@ -216,8 +218,8 @@ const Grocery = () => {
                                         onPress={() => updateSelectedPantryIDs(foodItem.id)}
                                         style={{
                                             backgroundColor: checkedPantryIDs.includes(foodItem.id) ? "lightgray" : "white",
-                                            width: 17,
-                                            height: 17,
+                                            width: 20,
+                                            height: 20,
                                             borderWidth: 1,
                                             borderColor: "black",
                                             flexDirection: "row",

@@ -3,6 +3,7 @@ import FoodManagerDataService from "../../../services/FoodManagerDataService";
 import DropdownComponent from '../../components/DropdownComponent.js';
 import { View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
+import styles from '../../../Styles';
 
 const AddWeeklyFood = () => {
 
@@ -77,11 +78,11 @@ const AddWeeklyFood = () => {
 
     return (
         submitted
-            ? <View>
-                <Text>You submitted successfully!</Text>
-                <Text>Click below to add another item.</Text>
+            ? <View style={{ alignItems: "center" }}>
+                <Text style={styles.modalText}>You submitted successfully!</Text>
+                <Text style={styles.subtext}>Click below to add more items.</Text>
                 <Button
-                    style={{ backgroundColor: "green" }}
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 200, marginTop: 20 }}
                     raised
                     onPress={newFood}
                 >
@@ -89,16 +90,19 @@ const AddWeeklyFood = () => {
                 </Button>
             </View>
             : <View>
-                <Text>Add To Weekly Food List</Text>
-                <Text>Add food items from your pantry that you want to use this week.</Text>
-                <DropdownComponent
-                    updateFunction={setFood}
-                    dropdownData={dropdownData}
-                    // placeholder={grocery.type}
-                    width={150}
-                />
+                <Text style={styles.pageTitle}>Add To Weekly Food List</Text>
+                <Text style={{ textAlign: "center", color: "gray", marginTop: 10, marginBottom: 10 }}>Add food items from your pantry that you want to use this week.</Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.modalCategory}>Name:</Text>
+                    <DropdownComponent
+                        updateFunction={setFood}
+                        dropdownData={dropdownData}
+                        placeholder=""
+                        width={240}
+                    />
+                </View>
                 <Button
-                    style={{ backgroundColor: "green" }}
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 100, alignSelf: "center", marginTop: 15 }}
                     raised
                     onPress={changeUseThisWeekValue}
                 >
