@@ -20,6 +20,22 @@ const styles = StyleSheet.create({
     pageTitle: {
         fontSize: 30,
         marginBottom: 10,
+        backgroundColor: "green",
+        alignSelf: "stretch",
+        textAlign: "center",
+        padding: 10,
+        color: "white",
+    },
+    subTitle: {
+        fontSize: 20,
+        marginBottom: 10,
+        marginTop: 20,
+        backgroundColor: "slategray",
+        alignSelf: "stretch",
+        textAlign: "center",
+        padding: 10,
+        color: "white",
+        width: 350,
     },
     subtext: {
         color: "gray",
@@ -27,6 +43,16 @@ const styles = StyleSheet.create({
     pantrySubtext: {
         color: "gray",
         marginBottom: 5,
+    },
+    modalCategory: {
+        marginBottom: 10,
+        marginTop: 10,
+        fontWeight: 'bold',
+    },
+    modalText: {
+        fontSize: 20,
+        marginTop: 10,
+        marginBottom: 10,
     }
 });
 

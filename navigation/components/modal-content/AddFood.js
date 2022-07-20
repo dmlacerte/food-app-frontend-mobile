@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import FoodManagerDataService from "../../../services/FoodManagerDataService";
 import GroceryManagerDataService from "../../../services/GroceryManagerDataService";
 import DropdownComponent from '../../components/DropdownComponent.js';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import DatePicker from 'react-native-date-picker';
+import styles from '../../../Styles';
 
 const AddFood = ({ id }) => {
     const initialFoodState = {
         id: null,
         name: "",
         type: "Misc",
-        expDate: "",
+        expDate: new Date(),
         useThisWeek: false
     };
 
@@ -58,9 +59,7 @@ const AddFood = ({ id }) => {
                     deleteGroceryItem();
 
                     let newcheckedGroceryIDs = [...checkedGroceryIDs];
-                    console.log(newcheckedGroceryIDs)
                     newcheckedGroceryIDs.shift();
-                    console.log(newcheckedGroceryIDs)
                     setCheckedGroceryIDs(newcheckedGroceryIDs);
                 }
 
@@ -105,15 +104,15 @@ const AddFood = ({ id }) => {
 
     useEffect(() => {
         checkForGrocery();
-    }, [submitted]);
+    }, [checkedGroceryIDs]);
 
     return (
         submitted && (!checkedGroceryIDs || checkedGroceryIDs.length === 0)
-            ? <View>
-                <Text>You submitted successfully!</Text>
-                <Text>Click below to add another item.</Text>
+            ? <View style={{ alignItems: "center" }}>
+                <Text style={styles.modalText}>You submitted successfully!</Text>
+                <Text style={styles.subtext}>Click below to add more items.</Text>
                 <Button
-                    style={{ backgroundColor: "green" }}
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 200, marginTop: 20 }}
                     raised
                     onPress={newFood}
                 >
@@ -121,18 +120,23 @@ const AddFood = ({ id }) => {
                 </Button>
             </View>
             : <View>
-                <Text>Add To Pantry</Text>
+                <Text style={styles.pageTitle}>Add To Pantry</Text>
+                <Text style={styles.modalCategory}>Name:</Text>
                 <TextInput
                     label='Name'
                     value={food.name}
                     onChangeText={text => handleInputChange('name', text)}
                 />
-                <DropdownComponent
-                    updateForm={handleInputChange}
-                    dropdownData={dropdownData}
-                    placeholder='Select type'
-                    width={150}
-                />
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.modalCategory}>Type:</Text>
+                    <DropdownComponent
+                        updateForm={handleInputChange}
+                        dropdownData={dropdownData}
+                        placeholder={food.type}
+                        width={150}
+                    />
+                </View>
+                <Text style={styles.modalCategory}>Expiration Date:</Text>
                 <DatePicker
                     mode="date"
                     date={date}
@@ -140,16 +144,29 @@ const AddFood = ({ id }) => {
                         setDate(newDate);
                         handleInputChange('expDate', newDate);
                     }}
+                    style={{ alignSelf: "center" }}
                 />
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <TouchableHighlight
+                        onPress={() => handleInputChange('useThisWeek', !food.useThisWeek)}
+                        style={{
+                            backgroundColor: food.useThisWeek ? "lightgray" : "white",
+                            width: 20,
+                            height: 20,
+                            borderWidth: 1,
+                            borderColor: "black",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginRight: 5,
+                        }}
+                    >
+                        <Text> {food.useThisWeek ? "✓" : null} </Text>
+                    </TouchableHighlight>
+                    <Text style={styles.modalCategory}>Use This Week?</Text>
+                </View>
                 <Button
-                    style={{ backgroundColor: "lightgray" }}
-                    raised
-                    onPress={() => handleInputChange('useThisWeek', !food.useThisWeek)}
-                >
-                    ✓
-                </Button>
-                <Button
-                    style={{ backgroundColor: "green" }}
+                    style={{ borderWidth: 1, backgroundColor: "green", width: 100, alignSelf: "center", marginTop: 15 }}
                     raised
                     onPress={saveFood}
                 >

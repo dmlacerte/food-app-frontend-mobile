@@ -6,7 +6,7 @@ const AddToMealPlanButton = ({ index, value, changeUseThisWeekValue }) => {
     return (
         <>
             <Button
-                style={{ backgroundColor: value ? "green" : "gray" }}
+                style={{ borderWidth: 1, borderColor: "black", backgroundColor: value ? "green" : "lightgray", }}
                 raised
                 onPress={() => {
                     changeUseThisWeekValue(index);

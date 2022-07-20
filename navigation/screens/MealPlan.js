@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from '../../Styles';
 
-const MyMealPlan = ({ navigation }) => {
+const MealPlan = () => {
     return (
         <View style={styles.container}>
             <Text>Meal Plan Page</Text>
@@ -10,4 +10,4 @@ const MyMealPlan = ({ navigation }) => {
     )
 }
 
-export default MyMealPlan; 
+export default MealPlan; 

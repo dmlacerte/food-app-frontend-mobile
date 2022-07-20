@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from "react";
-import FoodManagerDataService from "../../../services/FoodManagerDataService";
+import GroceryManagerDataService from "../../../services/GroceryManagerDataService";
 import DropdownComponent from '../../components/DropdownComponent.js';
 import { View, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-import DatePicker from 'react-native-date-picker';
 import styles from '../../../Styles';
 
-const MyFood = ({ id, closeModal }) => {
+const MyGrocery = ({ id, closeModal }) => {
 
-    const initialFoodState = {
+    const initialGroceryState = {
         id: null,
         name: "",
         type: ""
     };
 
-    const [currentFood, setCurrentFood] = useState(initialFoodState);
-    const [date, setDate] = useState(new Date());
+    const [currentGrocery, setCurrentGrocery] = useState(initialGroceryState);
     const dropdownData = [
         { label: 'Vegetable', value: 'Vegetable' },
         { label: 'Fruit', value: 'Fruit' },
@@ -26,14 +24,11 @@ const MyFood = ({ id, closeModal }) => {
         { label: 'Misc', value: 'Misc' },
     ];
 
-    const getFood = foodID => {
-        FoodManagerDataService.get(foodID)
+    const getGrocery = groceryID => {
+        GroceryManagerDataService.get(groceryID)
             .then(response => {
-                setCurrentFood(response.data);
+                setCurrentGrocery(response.data);
                 console.log(response.data);
-
-                const expDate = new Date(response.data.expDate.replace(/-/g, '\/'));
-                setDate(expDate);
             })
             .catch(e => {
                 console.log(e);
@@ -41,13 +36,11 @@ const MyFood = ({ id, closeModal }) => {
     };
 
     const handleInputChange = (name, value) => {
-        if (name === "useThisWeek") value = !food.useThisWeek;
-
-        setCurrentFood({ ...currentFood, [name]: value });
+        setCurrentGrocery({ ...currentGrocery, [name]: value });
     };
 
-    const updateFood = () => {
-        FoodManagerDataService.update(currentFood.id, currentFood)
+    const updateGrocery = () => {
+        GroceryManagerDataService.update(currentGrocery.id, currentGrocery)
             .then(response => {
                 console.log(response.data);
                 closeModal();
@@ -57,8 +50,8 @@ const MyFood = ({ id, closeModal }) => {
             });
     };
 
-    const deleteFood = () => {
-        FoodManagerDataService.remove(currentFood.id)
+    const deleteGrocery = () => {
+        GroceryManagerDataService.remove(currentGrocery.id)
             .then(response => {
                 console.log(response.data);
                 closeModal();
@@ -70,16 +63,16 @@ const MyFood = ({ id, closeModal }) => {
 
     useEffect(() => {
         if (id)
-            getFood(id);
+            getGrocery(id);
     }, []);
 
     return (
         <View>
-            <Text style={styles.pageTitle}>Edit Pantry Item</Text>
+            <Text style={styles.pageTitle}>Edit Grocery Item</Text>
             <Text style={styles.modalCategory}>Name:</Text>
             <TextInput
                 label='Name'
-                value={currentFood.name}
+                value={currentGrocery.name}
                 onChangeText={text => handleInputChange('name', text)}
             />
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -87,32 +80,22 @@ const MyFood = ({ id, closeModal }) => {
                 <DropdownComponent
                     updateForm={handleInputChange}
                     dropdownData={dropdownData}
-                    placeholder={currentFood.type}
+                    placeholder={currentGrocery.type}
                     width={150}
                 />
             </View>
-            <Text style={styles.modalCategory}>Expiration Date:</Text>
-            <DatePicker
-                mode="date"
-                date={date}
-                onDateChange={newDate => {
-                    setDate(newDate);
-                    handleInputChange('expDate', newDate);
-                }}
-                style={{ alignSelf: "center" }}
-            />
             <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 20 }}>
                 <Button
                     style={{ borderWidth: 1, backgroundColor: "green", width: 100 }}
                     raised
-                    onPress={updateFood}
+                    onPress={updateGrocery}
                 >
                     Update
                 </Button>
                 <Button
                     style={{ borderWidth: 1, backgroundColor: "indianred", width: 100, marginLeft: 5 }}
                     raised
-                    onPress={deleteFood}
+                    onPress={deleteGrocery}
                 >
                     Delete
                 </Button>
@@ -121,4 +104,4 @@ const MyFood = ({ id, closeModal }) => {
     );
 };
 
-export default MyFood;
+export default MyGrocery;
