@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const DropdownComponent = ({ updateFunction, updateForm, dropdownData, placeholder, width }) => {
   const [value, setValue] = useState(null);
@@ -72,15 +71,6 @@ const DropdownComponent = ({ updateFunction, updateForm, dropdownData, placehold
           updateFunction ? updateFunction(item.value) : null;
           updateForm ? updateForm('type', item.value) : null;
         }}
-        // renderLeftIcon={() => (
-        //   // <AntDesign
-        //   //   style={styles.icon}
-        //   //   color={isFocus ? 'blue' : 'black'}
-        //   //   name="Safety"
-        //   //   size={20}
-        //   // />
-        //   value
-        // )}
       />
     </View>
   );

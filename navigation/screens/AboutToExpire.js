@@ -1,24 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import RenderHtml from 'react-native-render-html';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Text, View } from 'react-native';
 import FoodManagerDataService from "../../services/FoodManagerDataService";
 import DropdownComponent from '../components/DropdownComponent.js';
 import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
 import styles from '../../Styles';
-import ModalContainer from '../components/ModalContainer.js';
-import { Button } from 'react-native-paper';
-import CardComponent from '../components/CardComponent.js'
-import {
-    Card,
-    CardActions,
-    CardContent,
-    CardCover,
-    Title,
-    Paragraph
-} from 'react-native-paper';
 
 const AboutToExpire = () => {
 
@@ -88,8 +74,6 @@ const AboutToExpire = () => {
     useEffect(() => {
         retrieveFoodItems();
     }, []);
-
-    // const { width } = useWindowDimensions();
 
     return (
         <View style={styles.container}>

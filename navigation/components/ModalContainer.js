@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Modal from "react-native-modal";
 import { Button } from 'react-native-paper';
 import AddFood from "./modal-content/AddFood";
@@ -38,7 +38,6 @@ function ModalContainer({ triggerText, retrieveItems, id }) {
 
     return (
         <View>
-            {/* <Button title="Show modal" onPress={toggleModal} /> */}
             <Button style={{ backgroundColor: "green" }} raised onPress={toggleModal}>
                 {triggerText}
             </Button>
@@ -46,8 +45,6 @@ function ModalContainer({ triggerText, retrieveItems, id }) {
             <Modal isVisible={isModalVisible}>
                 <View style={{ flex: 1, backgroundColor: "white" }}>
                     {determineModal}
-
-                    {/* <Button title="Hide modal" onPress={toggleModal} /> */}
                     <Button style={{ backgroundColor: "gray" }} raised onPress={toggleModal}>
                         Close
                     </Button>

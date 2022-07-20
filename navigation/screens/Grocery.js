@@ -189,6 +189,21 @@ const Grocery = () => {
                         </View>
                     </View>
                 ))}
+                { checkedGroceryIDs.length > 0 
+                ? <View>
+                    <TouchableHighlight
+                        onPress={() => {
+                            retrieveGroceryItems();
+                            retrieveFoodItems();
+                        }}
+                    >
+                        <Text>Add to Pantry</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={removeFromGroceryList}>
+                        <Text>Remove From Grocery List</Text>
+                    </TouchableHighlight>
+                </View>
+                : null }
             </View>
             <View>
                 <Text style={styles.pageTitle}>Pantry</Text>
@@ -198,9 +213,9 @@ const Grocery = () => {
                             <View key={index} style={styles.foodItemContainer}>
                                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                                     <TouchableHighlight
-                                        onPress={() => updateSelectedGroceryIDs(foodItem.id)}
+                                        onPress={() => updateSelectedPantryIDs(foodItem.id)}
                                         style={{
-                                            backgroundColor: checkedGroceryIDs.includes(foodItem.id) ? "lightgray" : "white",
+                                            backgroundColor: checkedPantryIDs.includes(foodItem.id) ? "lightgray" : "white",
                                             width: 17,
                                             height: 17,
                                             borderWidth: 1,
@@ -211,7 +226,7 @@ const Grocery = () => {
                                             marginRight: 5,
                                         }}
                                     >
-                                        {checkedGroceryIDs.includes(foodItem.id)
+                                        {checkedPantryIDs.includes(foodItem.id)
                                             ? <Text>✓</Text>
                                             : <Text> </Text>
                                         }
@@ -226,6 +241,16 @@ const Grocery = () => {
                             </View>
                             : null
                     ))}
+                    { checkedPantryIDs.length > 0 
+                ? <View>
+                    <TouchableHighlight onPress={removeFromWeeklyPlan}>
+                        <Text>Remove From Weekly Plan</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={removeFromPantry}>
+                        <Text>Remove From Pantry</Text>
+                    </TouchableHighlight>
+                </View>
+                : null }
             </View>
         </View>
     )
