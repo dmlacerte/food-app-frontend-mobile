@@ -1,30 +1,24 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import RenderHtml from 'react-native-render-html';
-import { Dropdown } from 'react-native-material-dropdown';
+import { Text, View } from 'react-native';
 import FoodManagerDataService from "../../services/FoodManagerDataService";
 import DropdownComponent from '../components/DropdownComponent.js';
 import AddToMealPlanButton from '../components/AddToMealPlanButton.js';
 import styles from '../../Styles';
-import ModalContainer from '../components/ModalContainer.js';
-import { Button } from 'react-native-paper';
-import CardComponent from '../components/CardComponent.js'
-import {
-    Card,
-    CardActions,
-    CardContent,
-    CardCover,
-    Title,
-    Paragraph
-} from 'react-native-paper';
 
-const AboutToExpire = ({ navigation }) => {
+const AboutToExpire = () => {
 
     const [foodItems, setFoodItems] = useState([]);
     const [expDateRange, setExpDateRange] = useState(7);
-    // const potentialDates = [1, 2, 3, 4, 5, 6, 7];
+    const dropdownData = [
+        { label: '1', value: '1' },
+        { label: '2', value: '2' },
+        { label: '3', value: '3' },
+        { label: '4', value: '4' },
+        { label: '5', value: '5' },
+        { label: '6', value: '6' },
+        { label: '7', value: '7' },
+    ];
 
     const compareItems = (a, b) => {
         const itemA = a.name.toUpperCase();
@@ -81,17 +75,18 @@ const AboutToExpire = ({ navigation }) => {
         retrieveFoodItems();
     }, []);
 
-    // const { width } = useWindowDimensions();
-
     return (
         <View style={styles.container}>
             <Text style={styles.pageTitle}>Use It or Lose It</Text>
             <Text>Select date range for expiring food:</Text>
             <DropdownComponent
-                setExpDateRange={setExpDateRange}
+                updateFunction={setExpDateRange}
+                dropdownData={dropdownData}
+                placeholder='7'
+                width={100}
             />
             <Text style={styles.subtext}>Select ✓ to add to weekly meal plan.</Text>
-            {foodItems &&
+            {foodItems.length > 0 &&
                 foodItems.map((foodItem, index) => (
                     calcDate(foodItem.expDate) <= expDateRange ?
                         <View key={index} style={styles.foodItemContainer}>
@@ -109,9 +104,6 @@ const AboutToExpire = ({ navigation }) => {
                         </View>
                         : null
                 ))}
-            {/* <Button style={{ backgroundColor: "green" }} raised onPress={() => console.log('Pressed')}>
-                Add
-            </Button> */}
         </View>
     )
 }
