@@ -33,6 +33,21 @@ export default function App() {
         <Tab.Navigator
           initialRouteName={pantryName}
           screenOptions={({ route }) => ({
+            tabBarActiveTintColor: "black",
+            tabBarInactiveTintColor: "white",
+            tabBarLabelStyle: {
+              paddingBottom: 10,
+              fontSize: 10,
+            },
+            tabBarStyle: [
+              {
+                display: "flex",
+                backgroundColor: "darkseagreen",
+                height: 60,
+                paddingTop: 10,
+              },
+              null
+            ],
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
               let routeName = route.name;
@@ -50,12 +65,6 @@ export default function App() {
               return <Ionicons name={iconName} size={size} color={color} />
             }
           })}
-          tabBarOptions={{
-            activeTintColor: 'black',
-            inactiveTintColor: 'gray',
-            labelStyle: { paddingBottom: 10, fontSize: 10 },
-            style: { padding: 10, height: 70 }
-          }}
         >
 
           <Tab.Screen
@@ -65,26 +74,26 @@ export default function App() {
             name={pantryName}
             component={MyPantry}
           />
-          <Tab.Screen 
+          <Tab.Screen
             options={{
               unmountOnBlur: true,
             }}
-            name={expireName} 
-            component={AboutToExpire} 
+            name={expireName}
+            component={AboutToExpire}
           />
-          <Tab.Screen 
+          <Tab.Screen
             options={{
               unmountOnBlur: true,
             }}
-            name={groceryName} 
-            component={MyGrocery} 
+            name={groceryName}
+            component={MyGrocery}
           />
-          <Tab.Screen 
+          <Tab.Screen
             options={{
               unmountOnBlur: true,
             }}
-            name={mealPlanName} 
-            component={MyMealPlan} 
+            name={mealPlanName}
+            component={MyMealPlan}
           />
 
         </Tab.Navigator>

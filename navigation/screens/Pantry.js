@@ -92,6 +92,7 @@ const Pantry = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.pageTitle}>My Pantry</Text>
+            <Text>Select to filter food by category:</Text>
             <View style={{ flexDirection: "row" }}>
                 <DropdownComponent
                     updateFunction={setSelectedType}
@@ -100,8 +101,7 @@ const Pantry = () => {
                     width={150}
                 />
             </View>
-            <Text style={styles.pantrySubtext}>Select ✓ to add to weekly meal plan.</Text>
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", marginBottom: 10 }}>
                 <ModalContainer
                     triggerText="Add"
                     retrieveItems={retrieveFoodItems}
@@ -110,6 +110,7 @@ const Pantry = () => {
                     Remove All
                 </Button>
             </View>
+            <Text style={styles.pantrySubtext}>Select ✓ to add to weekly meal plan.</Text>
             {foodItems.length > 0 &&
                 foodItems.map((foodItem, index) => (
                     !selectedType || selectedType === 'All' || selectedType === foodItem.type ?
@@ -125,11 +126,13 @@ const Pantry = () => {
                                     value={foodItem.useThisWeek}
                                     changeUseThisWeekValue={changeUseThisWeekValue}
                                 />
-                                <ModalContainer
-                                    id={foodItem.id}
-                                    triggerText="Update"
-                                    retrieveItems={retrieveFoodItems}
-                                />
+                                <View style={{ marginLeft: 5 }}>
+                                    <ModalContainer
+                                        id={foodItem.id}
+                                        triggerText="Update"
+                                        retrieveItems={retrieveFoodItems}
+                                    />
+                                </View>
                             </View>
                         </View>
                         : null

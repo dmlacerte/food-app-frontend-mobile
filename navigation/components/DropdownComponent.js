@@ -19,9 +19,6 @@ const DropdownComponent = ({ updateFunction, updateForm, dropdownData, placehold
       borderRadius: 8,
       paddingHorizontal: 8,
     },
-    icon: {
-      marginRight: 5,
-    },
     label: {
       position: 'absolute',
       backgroundColor: 'white',
