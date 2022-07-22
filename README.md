@@ -12,7 +12,7 @@ React Native, Javascript
 <details>
 <summary>Available both as a mobile and web application.</summary>
 
-<br />
+![web](https://user-images.githubusercontent.com/97196460/180505181-1d0f9f21-cd2f-4d1d-bd90-fb208d8ca422.gif)<br />
 
 </details>
 <details>
