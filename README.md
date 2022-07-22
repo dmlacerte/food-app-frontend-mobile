@@ -36,19 +36,13 @@ React Native, Javascript
 <details>
 <summary>Create your grocery list - and once you're done shopping, add your items to your pantry with the click of a button.</summary>
 
- <br />
-
-</details>
-<details>
-<summary></summary>
-
- <br />
+![app-grocery](https://user-images.githubusercontent.com/97196460/180503955-4cf1aa72-3a9a-4411-94f2-31aaa4f926e0.gif)<br />
 
 </details>
 <details>
 <summary>Create a visual schedule of your weekly meal plan to make sure your pantry items are getting used!</summary>
 
- <br />
+![app-meal-planner](https://user-images.githubusercontent.com/97196460/180504207-348c5363-8630-4140-9543-5ce6909f3b0f.gif)<br />
 
 </details>
 
