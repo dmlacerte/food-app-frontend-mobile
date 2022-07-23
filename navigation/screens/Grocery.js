@@ -142,6 +142,7 @@ const Grocery = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.pageTitle}>Food To Use This Week</Text>
+            <Text>Manage your grocery and weekly food lists:</Text>
             <View style={{ flexDirection: "row", marginTop: 10 }}>
                 <ModalContainer
                     triggerText="Add Grocery"
